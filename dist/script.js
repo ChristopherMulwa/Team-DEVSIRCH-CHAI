@@ -358,7 +358,7 @@ function parseMarkdownForCards(markdown) {
     return html;
 }
 const activities = [
-    { id: "weekly-summary", title: "Weekly Research Summary", markdownContent: weeklySummaryMarkdown },
+    { id: "weekly-summary", title: "Week 3 Research Summary", markdownContent: weeklySummaryMarkdown },
     { id: "ai-techniques", title: "Core AI Techniques Explained", markdownContent: aiTechniquesMarkdown },
     { id: "tech-stacks", title: "Exploring Robust Tech Stacks", markdownContent: techStacksMarkdown },
     { id: "ethical-ai", title: "Ethical AI Checklist", markdownContent: ethicalAiChecklistMarkdown },
