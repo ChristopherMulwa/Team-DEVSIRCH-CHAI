@@ -70,12 +70,13 @@ header p {
 
 /* Navigation Styling */
 nav {
-    background-color: #34495e;
+    background-color: rgba(52, 73, 94, 0.8); /* Semi-transparent dark background */
     padding: 0.75rem 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: sticky; /* Make the navigation bar sticky */
-    top: 0;            /* Stick to the top of the viewport */
-    z-index: 1000;     /* Ensure it stays above other content */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(5px); /* Frosted glass effect for modern feel, with fallback */
 }
 
 #activity-nav {
@@ -85,10 +86,11 @@ nav {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 15px; /* Use gap for spacing between items */
 }
 
 #activity-nav li {
-    margin: 0 15px;
+    margin: 0; /* Remove individual margins, rely on gap */
 }
 
 #activity-nav a {
@@ -99,6 +101,7 @@ nav {
     display: block;
     transition: background-color 0.3s ease, color 0.3s ease;
     border-radius: 5px;
+    white-space: nowrap; /* Prevent nav links from wrapping prematurely */
 }
 
 #activity-nav a:hover,
@@ -286,10 +289,15 @@ nav {
     #activity-nav {
         flex-direction: column;
         align-items: center;
+        gap: 5px; /* Smaller gap for mobile vertical list */
     }
 
     #activity-nav li {
-        margin: 5px 0;
+        margin: 0; /* Ensure no extra margins on mobile */
+    }
+
+    #activity-nav a {
+        padding: 0.4rem 0.6rem; /* Slightly smaller padding for mobile nav items */
     }
 
     #activity-content {
