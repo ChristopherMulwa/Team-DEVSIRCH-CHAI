@@ -92,33 +92,34 @@ nav.nav-hide {
 }
 
 #activity-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Two columns, responsive */
+    gap: 0.5rem 1.5rem; /* Row gap and column gap */
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px; /* Use gap for spacing between items */
+    width: 100%; /* Ensure it takes full width of nav */
 }
 
 #activity-nav li {
-    margin: 0; /* Remove individual margins, rely on gap */
+    margin: 0; /* Remove previous margins */
+    text-align: center; /* Center the text in each column */
 }
 
 #activity-nav a {
     color: #ecf0f1;
     text-decoration: none;
-    font-weight: bold;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.8rem;
     display: block;
-    transition: background-color 0.3s ease, color 0.3s ease;
     border-radius: 5px;
-    white-space: nowrap; /* Prevent nav links from wrapping prematurely */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-#activity-nav a:hover,
-#activity-nav a.active {
-    background-color: #2980b9;
+#activity-nav a:hover, #activity-nav a.active {
+    background-color: rgba(44, 62, 80, 0.7);
     color: #ffffff;
 }
 
@@ -308,9 +309,8 @@ nav.nav-hide {
     }
 
     #activity-nav {
-        flex-direction: column;
-        align-items: center;
-        gap: 5px; /* Smaller gap for mobile vertical list */
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 0.5rem 0; /* No column gap on mobile */
     }
 
     #activity-nav li {
