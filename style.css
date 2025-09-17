@@ -162,18 +162,27 @@ nav {
     padding-bottom: 0.5rem;
 }
 
-.inner-activity-card h3 {
-    color: #2980b9;
-    font-size: 1.3rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+.inner-activity-card h3.ethical-ai-section-heading {
+    color: #2c3e50; /* A strong color for main sections of checklist */
+    font-size: 1.4rem;
+    margin-top: 2rem; /* More space for new section */
+    margin-bottom: 1rem;
+    border-bottom: 1px dashed #dcdcdc; /* Subtle separator */
+    padding-bottom: 0.5rem;
 }
 
-.inner-activity-card h4 {
-    color: #2980b9;
-    font-size: 1.1rem;
-    margin-top: 0.8rem;
-    margin-bottom: 0.4rem;
+.inner-activity-card h4.ethical-ai-question {
+    color: #c0392b; /* Red for Question */
+    font-size: 1.15rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.inner-activity-card h4.ethical-ai-checkpoints {
+    color: #2980b9; /* Blue for Checkpoints */
+    font-size: 1.15rem;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
 }
 
 .inner-activity-card p {
@@ -329,12 +338,17 @@ nav {
         font-size: 1.4rem;
     }
 
-    .inner-activity-card h3 {
+    .inner-activity-card h3.ethical-ai-section-heading {
         font-size: 1.2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
     }
 
-    .inner-activity-card h4 {
+    .inner-activity-card h4.ethical-ai-question,
+    .inner-activity-card h4.ethical-ai-checkpoints {
         font-size: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.2rem;
     }
 
     .inner-activity-card ul {

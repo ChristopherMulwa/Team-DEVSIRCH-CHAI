@@ -264,19 +264,23 @@ function parseMarkdownForCards(markdown) {
             continue;
         }
         // Handle bolded sub-sections within the weekly summary (e.g., **The Big Problem:**)
-        if (line.startsWith('**') && line.endsWith(':**') && markdown === weeklySummaryMarkdown) {
+        if (line.startsWith('**') && line.endsWith(':**') && (markdown === weeklySummaryMarkdown || line.match(/^\*\*\d+\.\s/))) {
             if (inList) {
                 html += `</ul>`;
                 inList = false;
             }
-            // Ensure previous inner-card is closed if this is a top-level summary sub-heading
             if (inCard) {
                 html += `</div></div>`;
                 inCard = false;
-            }
+            } // Ensure previous inner-card is closed
             // Extract content, remove ** and :** precisely
             const headingText = line.substring(2, line.length - 2).trim();
-            html += `<h3 class="summary-sub-heading">${headingText}</h3>`;
+            if (markdown === weeklySummaryMarkdown) {
+                html += `<h3 class="summary-sub-heading">${headingText}</h3>`;
+            }
+            else { // For Ethical AI Checklist's **NUMBER. Title:**
+                html += `<h3 class="ethical-ai-section-heading">${headingText}</h3>`;
+            }
             continue;
         }
         // Handle sub-section titles (H2 from markdown) which start a new 'inner-card' for the weekly summary
@@ -318,13 +322,29 @@ function parseMarkdownForCards(markdown) {
             html += '<hr>';
             continue;
         }
-        // Handle lists
+        // Handle list items starting with **Question:** or **Checkpoints:** specifically for Ethical AI
+        if (markdown === ethicalAiChecklistMarkdown && line.match(/^\*\s*\*\*(Question|Checkpoints):\*\*/)) {
+            if (inList) {
+                html += `</ul>`;
+                inList = false;
+            }
+            const match = line.match(/^\*\s*\*\*(Question|Checkpoints):\*\*(.*)/);
+            if (match) {
+                const type = match[1];
+                const restOfLine = match[2].trim();
+                html += `<h4 class="ethical-ai-${type.toLowerCase()}">${type}:</h4>`;
+                if (restOfLine) {
+                    html += `<p>${restOfLine.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/`(.*?)`/g, '<code>$1</code>')}</p>`;
+                }
+            }
+            continue;
+        }
+        // Handle generic lists
         if (line.startsWith('*') || line.startsWith('-')) {
             if (!inList) {
                 html += `<ul>`;
                 inList = true;
             }
-            // Robust list item parsing: remove leading bullet and then process bold/code
             let listItemContent = line.replace(/^(\s*[-*]+\s*)/, ''); // Remove leading bullet and spaces
             let processedListItem = listItemContent
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
@@ -338,7 +358,6 @@ function parseMarkdownForCards(markdown) {
             inList = false;
         }
         // Handle paragraphs
-        // Apply bold and code replacements here, as these are generic for all paragraphs
         if (line.trim() !== '') {
             let paragraph = line
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
