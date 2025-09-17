@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "ESNext",
+    "rootDir": ".", /* Specify the root directory of source files. */
+    "outDir": "./dist", /* Redirect output structure to the directory. */
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es2017", "dom"]
+  },
+  "include": ["script.ts"]
+}
