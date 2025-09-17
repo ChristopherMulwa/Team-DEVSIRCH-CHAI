@@ -420,4 +420,22 @@ document.addEventListener('DOMContentLoaded', () => {
             firstNavLink.classList.add('active');
         }
     }
+    let previousScrollPosition = window.pageYOffset;
+    window.addEventListener('scroll', () => {
+        const currentScrollPosition = window.pageYOffset;
+        const nav = document.querySelector('nav');
+        if (!nav)
+            return; // Ensure nav element exists
+        if (currentScrollPosition > previousScrollPosition && currentScrollPosition > 50) {
+            // Scrolling down, hide the nav bar after scrolling past a threshold
+            nav.classList.remove('nav-show');
+            nav.classList.add('nav-hide');
+        }
+        else if (currentScrollPosition < previousScrollPosition || currentScrollPosition <= 50) {
+            // Scrolling up or at the very top, show the nav bar
+            nav.classList.remove('nav-hide');
+            nav.classList.add('nav-show');
+        }
+        previousScrollPosition = currentScrollPosition;
+    });
 });
